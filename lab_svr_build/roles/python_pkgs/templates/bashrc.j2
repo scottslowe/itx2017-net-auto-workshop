@@ -8,6 +8,9 @@ fi
 # Set PATH to include netmiko-tools
 export PATH=$PATH:/home/{{ item.user }}/netmiko_tools/netmiko_tools
 
+# Modify PYTHONPATH to get extra libraries
+export PYTHONPATH=~/python-libs
+
 # Login to the Interop virtualenv
 source /home/{{ item.user }}/VENV/py27_interop/bin/activate
 #source /home/{{ item.user }}/VENV/py35_interop/bin/activate
