@@ -27,6 +27,7 @@
     - "{{ applied_users }}"
     - "{{ python_pkgs }}"
 
+# Ansible control machine is PY2 only
 - name: Install Ansible (PY27)
   pip: 
     name: "{{ item[1].name }}"
@@ -35,35 +36,39 @@
     virtualenv_python: python27
   with_nested:
     - "{{ applied_users }}"
-    - "{{ ansible_version }}"
+    - "{{ ansible_to_install }}"
   tags: ansible_pkg
 
+- name: Create .bashrc for each user
+  template: 
+    src: bashrc.j2 
+    dest: "{{ /home/{{ item.user }}/.bashrc }}"
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
 
-###
-###- name: Create .bashrc for each user
-###  template: src=bashrc.j2 dest=/home/{{item.user}}/.bashrc
-###  become: True
-###  become_user: "{{ item.user }}"
-###  with_items: "{{ applied_users }}"
-###
-###- name: Copying snmp_helper.py
-###  copy: 
-###    src: /home/gituser/pynet/snmp/snmp_helper.py 
-###    dest: "/home/{{ item.user }}/applied_python/lib/python2.7/site-packages/snmp_helper.py"
-###    owner: "{{ item.user }}"
-###    group: "{{ item.user }}" 
-###    mode: 0644
-###  with_items: "{{ applied_users }}"
-###
-###- name: Copying email_helper.py
-###  copy: 
-###    src: /home/gituser/pynet/email/email_helper.py 
-###    dest: "/home/{{ item.user }}/applied_python/lib/python2.7/site-packages/email_helper.py" 
-###    owner: "{{ item.user }}"
-###    group: "{{ item.user }}" 
-###    mode: 0644
-###  with_items: "{{ applied_users }}"
-###
-###- name: Set virtualenv directory permissions
-###  file: path=/home/{{item.user}}/applied_python recurse=yes owner={{item.user}} group={{item.user}}
-###  with_items: "{{ applied_users }}"
+- name: Copying snmp_helper.py
+  copy: 
+    src: snmp_helper.py 
+    dest: "/home/{{ item.user }}/applied_python/lib/python2.7/site-packages/snmp_helper.py"
+    owner: "{{ item.user }}"
+    group: "{{ item.user }}" 
+    mode: 0644
+  with_items: "{{ applied_users }}"
+
+- name: Copying email_helper.py
+  copy: 
+    src: email_helper.py 
+    dest: "/home/{{ item.user }}/applied_python/lib/python2.7/site-packages/email_helper.py" 
+    owner: "{{ item.user }}"
+    group: "{{ item.user }}" 
+    mode: 0644
+  with_items: "{{ applied_users }}"
+
+- name: Set virtualenv directory permissions (PY27)
+  file: path=/home/{{item.user}}/VENV/py27_interop recurse=yes owner={{item.user}} group={{item.user}}
+  with_items: "{{ applied_users }}"
+
+- name: Set virtualenv directory permissions (PY35)
+  file: path=/home/{{item.user}}/VENV/py35_interop recurse=yes owner={{item.user}} group={{item.user}}
+  with_items: "{{ applied_users }}"

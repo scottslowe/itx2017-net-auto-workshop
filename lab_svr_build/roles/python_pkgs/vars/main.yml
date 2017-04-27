@@ -1,3 +1,4 @@
+---
 python_pkgs:
   - pysnmp
   - paramiko
@@ -10,5 +11,5 @@ python_pkgs:
   - ciscoconfparse
   - pexpect
 
-ansible_version:
+ansible_to_install:
   - { name: ansible, version: 2.3.0.0 }
