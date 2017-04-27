@@ -1,3 +1,6 @@
 *.retry
 *.swp
 *.pyc
+
+lab_svr_build/main_interop1.yml
+lab_svr_build/main_interop2.yml
