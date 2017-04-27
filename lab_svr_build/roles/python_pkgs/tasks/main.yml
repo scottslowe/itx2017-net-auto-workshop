@@ -1,0 +1,82 @@
+
+- name: Create users
+  user: name={{ item.user }} comment="Applied Python user" home=/home/{{ item.user }} password={{ item.password }} shell=/bin/bash
+  with_items: "{{ applied_users }}"
+
+- name: Copying .vimrc files for applied python users
+  copy: src=.vimrc dest=/home/{{ item.user }}/.vimrc owner={{ item.user }} group={{ item.user }} mode=0600
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
+
+- name: Add pip packages into virtualenv
+  pip: name={{ item[1] }} virtualenv=/home/{{ item[0].user }}/VENV/py27_interop
+  with_nested: 
+    - "{{ applied_users }}"
+    -
+        - pysnmp
+        - paramiko
+
+###- name: Install Python pysnmp
+###  pip: name=pysnmp virtualenv=/home/{{item.user}}/applied_python
+###  with_items: "{{ applied_users }}"
+###
+###- name: Install Python paramiko
+###  pip: name=paramiko virtualenv=/home/{{item.user}}/applied_python
+###  with_items: "{{ applied_users }}"
+###
+###- name: Install Python jsonrpclib
+###  pip: name=jsonrpclib virtualenv=/home/{{item.user}}/applied_python
+###  with_items: "{{ applied_users }}"
+###
+###- name: Install Python pygal
+###  pip: name=pygal virtualenv=/home/{{item.user}}/applied_python
+###  with_items: "{{ applied_users }}"
+###
+###- name: Install Python pylint
+###  pip: name=pylint virtualenv=/home/{{item.user}}/applied_python
+###  with_items: "{{ applied_users }}"
+###
+###- name: Install Ansible
+###  pip: name=ansible virtualenv=/home/{{item.user}}/applied_python version=2.2.1.0
+###  with_items: "{{ applied_users }}"
+###
+###- name: Install ciscoconfparse
+###  pip: name=ciscoconfparse virtualenv=/home/{{item.user}}/applied_python version=1.2.47
+###  with_items: "{{ applied_users }}"
+###
+###- name: Install pexpect
+###  pip: name=pexpect virtualenv=/home/{{item.user}}/applied_python
+###  with_items: "{{ applied_users }}"
+###
+###- name: Create .bashrc for each user
+###  template: src=bashrc.j2 dest=/home/{{item.user}}/.bashrc
+###  become: True
+###  become_user: "{{ item.user }}"
+###  with_items: "{{ applied_users }}"
+###
+###- name: Copying snmp_helper.py
+###  copy: 
+###    src: /home/gituser/pynet/snmp/snmp_helper.py 
+###    dest: "/home/{{ item.user }}/applied_python/lib/python2.7/site-packages/snmp_helper.py"
+###    owner: "{{ item.user }}"
+###    group: "{{ item.user }}" 
+###    mode: 0644
+###  with_items: "{{ applied_users }}"
+###
+###- name: Copying email_helper.py
+###  copy: 
+###    src: /home/gituser/pynet/email/email_helper.py 
+###    dest: "/home/{{ item.user }}/applied_python/lib/python2.7/site-packages/email_helper.py" 
+###    owner: "{{ item.user }}"
+###    group: "{{ item.user }}" 
+###    mode: 0644
+###  with_items: "{{ applied_users }}"
+###
+###- name: Copying .ansible.cfg
+###  copy: src=.ansible.cfg dest=/home/{{item.user}}/.ansible.cfg owner={{item.user}} group={{item.user}} mode=0644
+###  with_items: "{{ applied_users }}"
+###
+###- name: Set virtualenv directory permissions
+###  file: path=/home/{{item.user}}/applied_python recurse=yes owner={{item.user}} group={{item.user}}
+###  with_items: "{{ applied_users }}"
