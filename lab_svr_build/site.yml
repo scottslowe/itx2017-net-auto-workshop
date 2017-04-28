@@ -7,3 +7,20 @@
   tags: server
   roles:
     - server_pkgs
+
+- name: Per-user Tasks
+  hosts: interop1:interop2
+  become: True
+  become_method: sudo
+  vars_files:
+    - main_interop1.yml
+  tags: interop
+  roles:
+    - python_pkgs
+    - ansible_general
+    - netmiko
+    - arista
+    - juniper 
+    - nexus
+    - napalm
+    - ansible_extras
