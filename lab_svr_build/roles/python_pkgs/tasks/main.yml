@@ -39,20 +39,6 @@
     - "{{ applied_users }}"
     - "{{ python_pkgs }}"
 
-# Ansible control machine is PY2 only
-- name: Install Ansible (PY27)
-  pip: 
-    name: "{{ item[1].name }}"
-    version: "{{ item[1].version }}"
-    virtualenv: "/home/{{ item[0].user }}/VENV/py27_interop"
-    virtualenv_python: python27
-  become: True
-  become_user: "{{ item[0].user }}"
-  with_nested:
-    - "{{ applied_users }}"
-    - "{{ ansible_to_install }}"
-  tags: ansible_pkg
-
 - name: Create python-libs dir
   file: 
      dest: "/home/{{ item.user }}/python-libs"
