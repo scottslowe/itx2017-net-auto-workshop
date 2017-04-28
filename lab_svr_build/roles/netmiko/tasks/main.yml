@@ -1,0 +1,34 @@
+---
+
+- name: Install Netmiko (PY27)
+  pip: 
+    name: netmiko
+    version: 1.3.0
+    virtualenv: "/home/{{ item.user }}/VENV/py27_interop"
+    virtualenv_python: python27
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
+
+- name: Install Netmiko (PY35)
+  pip: 
+    name: netmiko
+    version: 1.3.0
+    virtualenv: "/home/{{ item.user }}/VENV/py35_interop"
+    virtualenv_python: python35
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
+
+- name: Clone netmiko-tools repo
+  become: True
+  become_user: "{{ item.user }}"
+  git: repo=https://github.com/ktbyers/netmiko_tools dest=/home/{{ item.user }}/netmiko_tools
+  with_items: "{{ applied_users }}"
+
+- name: Copy .netmiko.yml file
+  become: True
+  become_user: "{{ item.user }}"
+  copy: src=.netmiko.yml dest=/home/{{ item.user }}/.netmiko.yml owner={{ item.user }} group={{ item.user }} mode=0600
+  with_items: "{{ applied_users }}"
+

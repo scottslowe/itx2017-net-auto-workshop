@@ -1,0 +1,15 @@
+---
+python_pkgs:
+  - pysnmp
+  - paramiko
+  - jsonrpclib
+  - pygal
+  - pylint
+  - pep8
+  - flake8
+  - pylama
+  - ciscoconfparse
+  - pexpect
+
+ansible_to_install:
+  - { name: ansible, version: 2.3.0.0 }

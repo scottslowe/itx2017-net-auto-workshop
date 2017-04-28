@@ -1,0 +1,9 @@
+---
+
+- name: Add Server Packages (yum)
+  hosts: interop1:interop2
+  become: True
+  become_method: sudo
+  tags: server
+  roles:
+    - server_pkgs
