@@ -1,0 +1,22 @@
+---
+
+# Latest as of 2017-04-27
+- name: Install Juniper PyEZ (PY27)
+  pip: 
+    name: junos-eznc
+    version: 2.1.1
+    virtualenv: "/home/{{ item.user }}/VENV/py27_interop"
+    virtualenv_python: python27
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
+
+- name: Install Juniper PyEZ (PY35)
+  pip: 
+    name: junos-eznc
+    version: 2.1.1
+    virtualenv: "/home/{{ item.user }}/VENV/py35_interop"
+    virtualenv_python: python35
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
