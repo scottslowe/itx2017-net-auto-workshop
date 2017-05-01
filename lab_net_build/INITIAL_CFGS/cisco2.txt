@@ -1,0 +1,206 @@
+!
+version 16.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no platform punt-keepalive disable-kernel-core
+platform console auto
+!
+hostname cisco2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition MANAGEMENT
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+
+no ip domain lookup
+ip domain name bogus.com
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-1692872229
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1692872229
+ revocation-check none
+ rsakeypair TP-self-signed-1692872229
+!
+!
+crypto pki certificate chain TP-self-signed-1692872229
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31363932 38373232 3239301E 170D3136 30393137 31343532 
+  31355A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 36393238 
+  37323232 39308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 01008C3F 8CC4110A 46D229F4 6CC98F4B B91EC0E7 14653DF4 929EFAE2 
+  735FBFB9 944BBB69 76183782 C7580776 A63E0B59 1FC59096 46083864 3BCBA45B 
+  DBBE4446 19E096CD 218C27B6 053F9ADA 3A9A442C 43028EA0 65751E97 E9AEA5AA 
+  79421470 4515CB08 B09A1546 0F2A547E 1BD79437 82000464 8675A977 0C46721B 
+  96EB64DD E69C1F5A BE21D8AE 9283BE65 F0D36816 360C71CB 266DDAF4 8E862D2F 
+  7665A0A9 1955CD7A 95B31F67 D24C4BB8 CF30E3CB 0ACA3698 0BEE3323 A2C3AF16 
+  B322FB52 BEDA9AB6 DE7B4D1A 6C89E060 0F971CC9 2192A88A E01D6B00 A7A4CBEC 
+  4EA3E233 AC213B27 6CFE403C 4ED6AF88 C48F0106 9DCB9B34 CE775B88 E22ED282 
+  98112FF5 A07B0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 142A6961 60B9636B 6AB03227 74EF7A25 CCEC0FCE 
+  81301D06 03551D0E 04160414 2A696160 B9636B6A B0322774 EF7A25CC EC0FCE81 
+  300D0609 2A864886 F70D0101 05050003 82010100 17DC579F D400261B 6E725759 
+  A99EE2D9 BE51F87C 00205EF4 7C647E18 C736108A E86E4C1C 5494FFA8 358D1D89 
+  B0919DBA 0C5F72DB 831C67E7 0EE7C2EB 961E0355 5FAAECC7 A946D7A0 1C401D0D 
+  FD4D1F63 C0BBCF43 DEAB63B5 11051773 172AA75D 389813A8 6080DFB6 C704A199 
+  EC8546B7 BA3C53C8 8B69DF64 5305FDEB 3A7ACA2A 1992AF6C C9D74A91 2601666D 
+  FE0AD3F3 81015D87 9721ED5B 7CAC12EC 3AB40C1C 8C51A871 C8EEB611 29B16D10 
+  A7AE1C00 4B71940E AD42D20C FD9B958D 7D353DDC 195CC910 1DDC2BE7 E971B2EA 
+  209F3F96 FBE167D6 E0E4E11F E58834D8 7FE78CB5 039297CD 113CB419 6C5F9733 
+  AF749425 129B78B2 D6BBEFA0 34F4CB8E FF9B43A7
+  	quit
+
+
+!
+!
+!
+!
+!
+!
+!
+license udi pid CSR1000V sn 9KXI0D7TVFI
+diagnostic bootup level minimal
+archive
+ path flash:archive
+!
+spanning-tree extend system-id
+netconf-yang cisco-odm on-demand-enable
+netconf-yang cisco-odm polling-enable
+netconf-yang
+restconf
+!
+username interop privilege 15 secret 5 $1$a/my$a0CIRF3vlwsnRfa1KOX4r0
+!
+redundancy
+!
+!
+!
+!
+!
+lldp run
+cdp run
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+! 
+! 
+! 
+! 
+!
+!
+interface GigabitEthernet1
+ vrf forwarding MANAGEMENT
+ ip address 10.0.0.52 255.255.255.0
+ negotiation auto
+!
+interface GigabitEthernet2
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet3
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet4
+ no ip address
+ negotiation auto
+!
+!
+virtual-service csr_mgmt
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip route vrf MANAGEMENT 0.0.0.0 0.0.0.0 10.0.0.2
+ip ssh version 2
+ip scp server enable
+!
+!
+!
+!
+!
+control-plane
+!
+ !
+ !
+ !
+ !
+!
+!
+!
+!
+!
+line con 0
+ stopbits 1
+line vty 0 4
+ privilege level 15
+ login local
+ transport preferred ssh
+line vty 5 30
+ privilege level 15
+ login local
+ transport preferred ssh
+!
+!
+!
+!
+!
+!
+end
