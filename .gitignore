@@ -11,3 +11,5 @@ lab_svr_build/ansible.out
 
 lab_net_build/ansible-hosts
 lab_net_build/DIFFS/*
+lab_net_build/INITIAL_CFGS/nxos1.txt
+lab_net_build/INITIAL_CFGS/nxos2.txt

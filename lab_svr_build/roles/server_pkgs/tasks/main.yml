@@ -65,3 +65,12 @@
     mode: "{{ item.mode }}"
   with_items:
     - { name: '.vimrc', mode: '0600' }
+
+- name: Install /etc/hosts file
+  copy:
+    src: hosts
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: '0644'
+  tags: etc_hosts
