@@ -35,5 +35,6 @@ print device_facts
 
 print 
 print ">>>Load full config"
-device.load_replace_candidate(filename='cisco2.txt')
+device.load_replace_candidate(filename='./INITIAL_CFGS/cisco2.txt')
 print device.compare_config()
+#device.commit()
