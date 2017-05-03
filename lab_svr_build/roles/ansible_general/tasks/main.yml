@@ -1,0 +1,33 @@
+---
+
+- name: Push ansible-hosts
+  template: 
+    src: ansible-hosts.j2 
+    dest: "/home/{{item.user}}/ansible-hosts"
+    owner: "{{ item.user }}"
+    group: "{{ item.user }}"
+    mode: 0644
+  with_items: "{{ applied_users }}"
+  tags: ansible_hosts
+
+- name: Copying .ansible.cfg
+  copy: 
+    src: .ansible.cfg 
+    dest: "/home/{{ item.user }}/.ansible.cfg"
+    owner: "{{ item.user }}"
+    group: "{{ item.user }}"
+    mode: 0644
+  with_items: "{{ applied_users }}"
+  tags: ansible_cfg
+
+# Ansible control machine is PY2 only
+- name: Install Ansible (PY27)
+  pip:
+    name: ansible
+    version: 2.3.0.0
+    virtualenv: "/home/{{ item.user }}/VENV/py27_interop"
+    virtualenv_python: python27
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
+  tags: ansible_pkg

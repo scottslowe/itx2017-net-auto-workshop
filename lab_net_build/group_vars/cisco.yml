@@ -1,0 +1,4 @@
+---
+napalm_optional:
+  inline_transfer: True
+  global_delay_factor: 2

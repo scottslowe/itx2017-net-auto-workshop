@@ -1,0 +1,27 @@
+---
+
+####
+#### ARISTA-ANSIBLE SECTION
+####
+
+# Latest release as of 2017-04-27
+- name: Install pyeapi (PY27)
+  pip:
+    name: pyeapi
+    version: 0.8.0
+    virtualenv: "/home/{{ item.user }}/VENV/py27_interop"
+    virtualenv_python: python27
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
+
+- name: Install pyeapi (PY35)
+  pip:
+    name: pyeapi
+    version: 0.8.0
+    virtualenv: "/home/{{ item.user }}/VENV/py35_interop"
+    virtualenv_python: python35
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
+

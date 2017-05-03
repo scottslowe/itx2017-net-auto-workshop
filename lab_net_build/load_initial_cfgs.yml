@@ -1,0 +1,16 @@
+---
+- name: Load Network Device Initial Config
+  hosts: cisco:juniper
+  gather_facts: False
+  tasks:
+    - napalm_install_config:
+        hostname: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        dev_os: "{{ dev_os }}"
+        config_file: "INITIAL_CFGS/{{ inventory_hostname }}.txt"
+        commit_changes: False
+        replace_config: True
+        get_diffs: True
+        diff_file: "DIFFS/{{ inventory_hostname }}.diff"
+        optional_args: "{{ napalm_optional | default({}) }}"

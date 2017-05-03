@@ -1,0 +1,21 @@
+---
+
+- name: Install pynxos (PY27)
+  pip: 
+    name: pynxos
+    version: 0.0.3
+    virtualenv: "/home/{{ item.user }}/VENV/py27_interop"
+    virtualenv_python: python27
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
+
+- name: Install pynxos (PY35)
+  pip: 
+    name: pynxos
+    version: 0.0.3
+    virtualenv: "/home/{{ item.user }}/VENV/py35_interop"
+    virtualenv_python: python35
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"

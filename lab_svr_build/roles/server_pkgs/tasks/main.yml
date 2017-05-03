@@ -1,0 +1,76 @@
+---
+
+- name: install required packages
+  yum: name={{item}} state=present
+  with_items:
+  - gcc
+  - bzip2
+  - net-snmp
+  - net-snmp-utils
+  - python-devel
+  - python-setuptools
+  - python34
+  - python34-devel
+  - python34-setuptools
+  - python35
+  - python35-devel
+  - python35-setuptools
+  - telnet
+  - wget
+  - emacs
+  - nano
+  - git
+  - vim-enhanced
+  - libyaml
+  - libyaml-devel
+  - libxslt-devel 
+  - libxml2-devel
+  - libffi-devel
+  - openssl-devel
+  - tree
+
+- name: Ensure virtualenv is installed
+  pip: name={{ item.name }} state=present use_mirrors=no
+  with_items:
+  - { name: 'virtualenv' }
+
+- name: Copying .bashrc and .vimrc files for gituser
+  copy: 
+    src: "{{ item.name }}"
+    dest: "/home/gituser/{{ item.name }}"
+    owner: gituser 
+    group: gituser 
+    mode: "{{ item.mode }}"
+  with_items:
+    - { name: '.bashrc', mode: '0600' }
+    - { name: '.vimrc', mode: '0600' }
+
+- name: Copying .bashrc and .vimrc files for ec2-user
+  copy:
+    src: "{{ item.name }}"
+    dest: "/home/ec2-user/{{ item.name }}"
+    owner: ec2-user 
+    group: ec2-user
+    mode: "{{ item.mode }}"
+  with_items:
+    - { name: '.bashrc', mode: '0600' }
+    - { name: '.vimrc', mode: '0600' }
+
+- name: Copying .vimrc file for root
+  copy:
+    src: "{{ item.name }}"
+    dest: "/root/{{ item.name }}"
+    owner: root
+    group: root
+    mode: "{{ item.mode }}"
+  with_items:
+    - { name: '.vimrc', mode: '0600' }
+
+- name: Install /etc/hosts file
+  copy:
+    src: hosts
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: '0644'
+  tags: etc_hosts

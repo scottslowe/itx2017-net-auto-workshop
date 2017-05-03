@@ -1,0 +1,71 @@
+
+- name: Create users
+  user: name={{ item.user }} comment="Applied Python user" home=/home/{{ item.user }} password={{ item.password }} shell=/bin/bash
+  with_items: "{{ applied_users }}"
+
+- name: Copying .vimrc files for applied python users
+  copy: src=.vimrc dest=/home/{{ item.user }}/.vimrc owner={{ item.user }} group={{ item.user }} mode=0600
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
+
+- name: Create .bashrc for each user
+  template: 
+    src: bashrc.j2 
+    dest: "/home/{{ item.user }}/.bashrc"
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
+
+- name: Add pip packages into virtualenv (PY27)
+  pip:
+    name: "{{ item[1] }}"
+    virtualenv: "/home/{{ item[0].user }}/VENV/py27_interop"
+    virtualenv_python: python27
+  become: True
+  become_user: "{{ item[0].user }}"
+  with_nested: 
+    - "{{ applied_users }}"
+    - "{{ python_pkgs }}"
+
+- name: Add pip packages into virtualenv (PY35)
+  pip: 
+    name: "{{ item[1] }}"
+    virtualenv: "/home/{{ item[0].user }}/VENV/py35_interop"
+    virtualenv_python: python35
+  become: True
+  become_user: "{{ item[0].user }}"
+  with_nested: 
+    - "{{ applied_users }}"
+    - "{{ python_pkgs }}"
+
+- name: Create python-libs dir
+  file: 
+     dest: "/home/{{ item.user }}/python-libs"
+     owner: "{{ item.user }}"
+     group: "{{ item.user }}"
+     mode: 0755
+     state: directory
+  with_items: "{{ applied_users }}"
+  tags: python_libs
+
+- name: Copying snmp_helper.py
+  copy: 
+    src: snmp_helper.py 
+    dest: "/home/{{ item.user }}/python-libs/snmp_helper.py"
+    owner: "{{ item.user }}"
+    group: "{{ item.user }}"
+    mode: 0644
+  with_items: "{{ applied_users }}"
+  tags: python_libs
+
+- name: Copying email_helper.py
+  copy: 
+    src: email_helper.py 
+    dest: "/home/{{ item.user }}/python-libs/email_helper.py"
+    owner: "{{ item.user }}"
+    group: "{{ item.user }}"
+    mode: 0644
+  with_items: "{{ applied_users }}"
+  tags: python_libs
+

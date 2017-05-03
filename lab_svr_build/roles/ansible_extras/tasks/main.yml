@@ -1,0 +1,19 @@
+---
+
+# Only works on PY27 (which is fine since probably only for Ansible)
+- name: Install pyntc (PY27)
+  pip: 
+    name: pyntc
+    virtualenv: "/home/{{ item.user }}/VENV/py27_interop"
+    virtualenv_python: python27
+  become: True
+  become_user: "{{ item.user }}"
+  with_items: "{{ applied_users }}"
+
+- name: Clone ntc-ansible repo
+  become: True
+  become_user: "{{ item.user }}"
+  git: 
+    repo: https://github.com/networktocode/ntc-ansible 
+    dest: "/home/{{ item.user }}/ansible-extras/ntc-ansible"
+  with_items: "{{ applied_users }}"
