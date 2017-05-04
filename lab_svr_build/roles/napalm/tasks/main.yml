@@ -2,7 +2,8 @@
 
 - name: Install napalm packages (PY27)
   pip: 
-    name: "{{ item[1] }}"
+    name: "{{ item[1].pkg }}"
+    version: "{{ item[1].version | default(omit) }}"
     virtualenv: "/home/{{ item[0].user }}/VENV/py27_interop"
     virtualenv_python: python27
   become: True
@@ -10,15 +11,16 @@
   with_nested: 
     - "{{ applied_users }}"
     -
-      - napalm-base
-      - napalm-junos
-      - napalm-nxos
-      - napalm-ios
-      - napalm-eos
+      - { pkg: napalm-base, version: 0.23.3 }
+      - { pkg: napalm-ios, version: 0.6.2 }
+      - { pkg: napalm-junos }
+      - { pkg: napalm-nxos }
+      - { pkg: napalm-eos }
 
 - name: Install napalm packages (PY35)
   pip: 
-    name: "{{ item[1] }}"
+    name: "{{ item[1].pkg }}"
+    version: "{{ item[1].version | default(omit) }}"
     virtualenv: "/home/{{ item[0].user }}/VENV/py35_interop"
     virtualenv_python: python35
   become: True
@@ -26,11 +28,11 @@
   with_nested: 
     - "{{ applied_users }}"
     -
-      - napalm-base
-      - napalm-junos
-      - napalm-nxos
-      - napalm-ios
-      - napalm-eos
+      - { pkg: napalm-base, version: 0.23.3 }
+      - { pkg: napalm-ios, version: 0.6.2 }
+      - { pkg: napalm-junos }
+      - { pkg: napalm-nxos }
+      - { pkg: napalm-eos }
 
 - name: Clone napalm-ansible repo
   git: 

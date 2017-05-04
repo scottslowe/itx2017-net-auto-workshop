@@ -3,22 +3,24 @@
 - name: Install Netmiko (PY27)
   pip: 
     name: netmiko
-    version: 1.3.0
+    version: 1.4.0
     virtualenv: "/home/{{ item.user }}/VENV/py27_interop"
     virtualenv_python: python27
   become: True
   become_user: "{{ item.user }}"
   with_items: "{{ applied_users }}"
+  tags: netmiko_version
 
 - name: Install Netmiko (PY35)
   pip: 
     name: netmiko
-    version: 1.3.0
+    version: 1.4.0
     virtualenv: "/home/{{ item.user }}/VENV/py35_interop"
     virtualenv_python: python35
   become: True
   become_user: "{{ item.user }}"
   with_items: "{{ applied_users }}"
+  tags: netmiko_version
 
 - name: Clone netmiko-tools repo
   become: True

@@ -13,7 +13,8 @@
   become: True
   become_method: sudo
   vars_files:
-    - main_interop1.yml
+#    - main_interop1.yml
+    - students_interop.yml
   tags: interop
   roles:
     - python_pkgs
@@ -22,5 +23,5 @@
     - arista
     - juniper 
     - nexus
-    - napalm
+    - { role: napalm, tags: napalm }
     - ansible_extras
