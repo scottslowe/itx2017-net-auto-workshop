@@ -3,4 +3,5 @@ from netmiko import ConnectHandler
 from getpass import getpass
 
 net_connect = ConnectHandler(device_type='cisco_ios', host='cisco1.twb-tech.com', username='interop', password=getpass())
-print(net_connect.find_prompt())
+show_arp = net_connect.send_command("show ip int brief")
+print(show_arp)
