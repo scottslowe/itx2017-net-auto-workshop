@@ -4,11 +4,14 @@ from napalm_base import get_network_driver
 from getpass import getpass
 from pprint import pprint
 
+
+pwd = getpass()
+
 arista5 = {
     'device_type': 'eos',
     'hostname': 'arista5.twb-tech.com', 
     'username': 'interop',
-    'password': getpass(),
+    'password': pwd,
     'optional_args': {},
 }
 
@@ -16,7 +19,7 @@ cisco1 = {
     'device_type': 'ios',
     'hostname': 'cisco1.twb-tech.com', 
     'username': 'interop',
-    'password': getpass(),
+    'password': pwd,
     'optional_args': {},
 }
 
