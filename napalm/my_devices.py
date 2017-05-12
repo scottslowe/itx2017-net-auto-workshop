@@ -44,6 +44,19 @@ arista8 = dict(
     password=password
 )
 
+juniper1 = dict(
+    device_type='juniper_junos',
+    host='juniper1.twb-tech.com',
+    username='interop',
+    password=password
+)
+
+juniper2 = dict(
+    device_type='juniper_junos',
+    host='juniper2.twb-tech.com',
+    username='interop',
+    password=password
+)
 
 device_list = [
     cisco1,
@@ -52,4 +65,11 @@ device_list = [
     arista6,
     arista7,
     arista8,
+    juniper1,
+]
+
+device_list_mv = [
+    cisco2,
+    arista6,
+    juniper1,
 ]
