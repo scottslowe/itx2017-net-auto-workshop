@@ -3,18 +3,21 @@ from __future__ import print_function
 from netmiko import ConnectHandler
 from getpass import getpass
 
+
+pwd = getpass()
+
 device1 = dict(
     device_type='cisco_ios',
     host='cisco1.twb-tech.com',
     username='interop',
-    password=getpass()
+    password=pwd
 )
 
 device2 = dict(
     device_type='cisco_ios',
     host='cisco2.twb-tech.com',
     username='interop',
-    password=getpass()
+    password=pwd
 )
 
 

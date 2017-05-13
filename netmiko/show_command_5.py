@@ -4,16 +4,12 @@ from netmiko import ConnectHandler
 from my_devices import device_list
 
 
-
-
 try:
     command = raw_input("Enter command: ")
 except NameError:
     command = input("Enter command: ")
 
-
 for device in device_list:
-
     net_connect = ConnectHandler(**device)
 
     # Send show command down channel
