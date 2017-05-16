@@ -1,0 +1,49 @@
+# ansible-playbook -i ~/ansible-hosts juniper_push_config.yml -v
+---
+- name: Configure nodes from templates
+  hosts: juniper1
+  vars:
+    ports:
+      - { name: 'ge-0/0/0', descr: Configured by ansible }
+
+
+  tasks:
+    - name: Ensure config dir exists
+      file:
+        path: configs
+        state: directory
+
+    - name: Ensure backups dir exists
+      file:
+        path: backups
+        state: directory
+
+    - name: Render config sections from templates
+      template:
+        src: templates/juniper-interfaces.j2
+        dest: configs/{{ ansible_host }}-new.cfg
+
+#    - name: Push config commands to nodes with built-in
+#      eos_config:
+#        provider: "{{ eapi_conn }}"
+#        src: configs/{{ ansible_host }}-new.cfg
+ 
+    - name: Push config commands to nodes with napalm
+      napalm_install_config:
+        hostname: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        dev_os: junos
+        config_file: "configs/{{ ansible_host }}-new.cfg"
+        archive_file: "backups/{{ ansible_host }}-old.cfg"
+        commit_changes: True
+        replace_config: False
+        diff_file: "{{ ansible_host }}.diff"
+
+#    - name: Push config commands to nodes with networktocode
+#      ntc_config_command:
+#        platform: "{{ ntc_platform }}"
+#        host: "{{ ansible_host }}"
+#        username: "{{ username }}"
+#        password: "{{ password }}"
+#        commands_file: configs/{{ ansible_host }}-new.cfg
