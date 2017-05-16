@@ -1,0 +1,7 @@
+{% for port in ports %}
+interface {{ port.name }}
+   description {{ port.descr }}
+{#
+   {% if port.enable %}no {% endif %}shutdown
+#}
+{% endfor %}
