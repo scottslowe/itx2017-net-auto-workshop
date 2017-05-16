@@ -4,56 +4,56 @@ password=getpass()
 
 cisco1 = dict(
     device_type='cisco_ios',
-    host='cisco1.twb-tech.com',
+    host='cisco-p1.twb-tech.com',
     username='interop',
     password=password
 )
 
 cisco2 = dict(
     device_type='cisco_ios',
-    host='cisco2.twb-tech.com',
+    host='cisco-p2.twb-tech.com',
     username='interop',
     password=password
 )
 
-arista5 = dict(
+arista1 = dict(
     device_type='arista_eos',
-    host='arista5.twb-tech.com',
+    host='arista-p1.twb-tech.com',
     username='interop',
     password=password
 )
 
-arista6 = dict(
+arista2 = dict(
     device_type='arista_eos',
-    host='arista6.twb-tech.com',
+    host='arista-p2.twb-tech.com',
     username='interop',
     password=password
 )
 
-arista7 = dict(
+arista3 = dict(
     device_type='arista_eos',
-    host='arista7.twb-tech.com',
+    host='arista-p3.twb-tech.com',
     username='interop',
     password=password
 )
 
-arista8 = dict(
+arista4 = dict(
     device_type='arista_eos',
-    host='arista8.twb-tech.com',
+    host='arista-p4.twb-tech.com',
     username='interop',
     password=password
 )
 
 juniper1 = dict(
     device_type='juniper_junos',
-    host='juniper1.twb-tech.com',
+    host='juniper-p1.twb-tech.com',
     username='interop',
     password=password
 )
 
 juniper2 = dict(
     device_type='juniper_junos',
-    host='juniper2.twb-tech.com',
+    host='juniper-p2.twb-tech.com',
     username='interop',
     password=password
 )
@@ -61,15 +61,15 @@ juniper2 = dict(
 device_list = [
     cisco1,
     cisco2,
-    arista5,
-    arista6,
-    arista7,
-    arista8,
+    arista1,
+    arista2,
+    arista3,
+    arista4,
     juniper1,
 ]
 
 device_list_mv = [
-    cisco2,
-    arista6,
+    cisco1,
+    arista1,
     juniper1,
 ]

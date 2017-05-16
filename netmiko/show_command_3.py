@@ -8,14 +8,14 @@ pwd = getpass()
 
 device1 = dict(
     device_type='cisco_ios',
-    host='cisco1.twb-tech.com',
+    host='cisco-p5.twb-tech.com',
     username='interop',
     password=pwd
 )
 
 device2 = dict(
-    device_type='cisco_ios',
-    host='cisco2.twb-tech.com',
+    device_type='arista_eos',
+    host='arista-p5.twb-tech.com',
     username='interop',
     password=pwd
 )

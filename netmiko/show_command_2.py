@@ -5,7 +5,7 @@ from getpass import getpass
 
 device1 = dict(
     device_type='cisco_ios',
-    host='cisco1.twb-tech.com',
+    host='cisco-p4.twb-tech.com',
     username='interop',
     password=getpass()
 )

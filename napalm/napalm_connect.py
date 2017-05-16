@@ -5,7 +5,7 @@ from getpass import getpass
 from pprint import pprint
 
 driver = get_network_driver('eos')
-device = driver('arista5.twb-tech.com', 
+device = driver('arista-p1.twb-tech.com', 
                 username='interop',
                 password=getpass())
 
