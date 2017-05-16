@@ -1,0 +1,22 @@
+---
+# ansible-playbook -i ~/ansible-hosts check_version.yml -v
+- name: Gather data from devices
+  hosts: arista
+  vars:
+    eapi_conn:
+      host: '{{ ansible_host }}'
+      username: interop
+      password: netauto42
+      transport: eapi
+      use_ssl: true
+      validate_certs: false
+
+  tasks:
+    - name: Ensure config dir exists
+      file:
+        path: configs
+        state: directory
+    - name: Get EOS version
+      eos_command:
+        commands='show version'
+        provider={{ eapi_conn }}
