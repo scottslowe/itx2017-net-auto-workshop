@@ -5,11 +5,13 @@
 lab_svr_build/main_interop1.yml
 lab_svr_build/main_interop2.yml
 lab_svr_build/students_interop.yml
+lab_svr_build/students_p*.yml
 lab_svr_build/roles/netmiko/files/.netmiko.yml
 lab_svr_build/roles/ansible_general/templates/ansible-hosts.j2
 lab_svr_build/ansible.out
 
 lab_net_build/ansible-hosts
+lab_net_build/ansible-hosts-pods
 lab_net_build/DIFFS/*
 lab_net_build/INITIAL_CFGS/nxos1.txt
 lab_net_build/INITIAL_CFGS/nxos2.txt
