@@ -16,6 +16,11 @@
 
 
   tasks:
+    - name: Ensure backups dir exists
+      file:
+        path: backups
+        state: directory
+
     - name: Ensure config dir exists
       file:
         path: configs
@@ -38,6 +43,7 @@
         password: "{{ password }}"
         dev_os: eos
         config_file: "configs/{{ ansible_host }}-new.cfg"
+        archive_file: "backups/{{ ansible_host }}-old.cfg"
         commit_changes: True
         replace_config: False
         diff_file: "{{ ansible_host }}.diff"
