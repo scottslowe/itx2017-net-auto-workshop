@@ -1,12 +1,43 @@
 127.0.0.1   localhost localhost.localdomain
 
-52.7.228.195   juniper1.twb-tech.com
-52.20.34.168   juniper2.twb-tech.com
+34.202.2.202  juniper1.twb-tech.com
+34.198.79.135  juniper2.twb-tech.com
 
-34.199.55.208  cisco1.twb-tech.com
-34.207.42.92   cisco2.twb-tech.com
+52.55.17.81   cisco1.twb-tech.com
+34.195.49.69  cisco2.twb-tech.com
 
 184.105.247.83  arista5.twb-tech.com
 184.105.247.84  arista6.twb-tech.com
 184.105.247.85  arista7.twb-tech.com
 184.105.247.86  arista8.twb-tech.com
+
+
+# POD1 (student1 - 12)
+52.54.3.175      cisco-p1.twb-tech.com
+54.80.31.117     juniper-p1.twb-tech.com
+34.224.151.176   arista-p1.twb-tech.com
+
+# POD2 (student13 - 24)
+34.202.211.156   cisco-p2.twb-tech.com
+52.200.223.110   juniper-p2.twb-tech.com
+34.197.96.208    arista-p2.twb-tech.com
+
+# POD3 (student25 - 36)
+34.202.133.42   cisco-p3.twb-tech.com
+34.239.231.50   juniper-p3.twb-tech.com
+34.199.104.47   arista-p3.twb-tech.com
+
+# POD4 (student37 - 48)
+34.224.238.136  cisco-p4.twb-tech.com
+34.203.23.77    juniper-p4.twb-tech.com
+34.204.102.54   arista-p4.twb-tech.com
+
+# POD5 (student49 - 65)
+34.200.122.61    cisco-p5.twb-tech.com
+34.196.184.79    juniper-p5.twb-tech.com
+52.20.142.11     arista-p5.twb-tech.com
+
+# POD6 (student65 - 79)
+34.224.141.169  cisco-p6.twb-tech.com
+52.45.108.75    juniper-p6.twb-tech.com
+34.202.48.108   arista-p6.twb-tech.com

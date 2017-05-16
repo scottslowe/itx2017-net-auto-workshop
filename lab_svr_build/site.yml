@@ -14,7 +14,13 @@
   become_method: sudo
   vars_files:
 #    - main_interop1.yml
-    - students_interop.yml
+#    - students_interop.yml
+#     - students_p1.yml
+#     - students_p2.yml
+#     - students_p3.yml
+#     - students_p4.yml
+#     - students_p5.yml
+     - students_p6.yml
   tags: interop
   roles:
     - python_pkgs

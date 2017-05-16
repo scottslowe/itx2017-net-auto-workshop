@@ -8,6 +8,7 @@ lab_svr_build/students_interop.yml
 lab_svr_build/students_p*.yml
 lab_svr_build/roles/netmiko/files/.netmiko.yml
 lab_svr_build/roles/ansible_general/templates/ansible-hosts.j2
+lab_svr_build/roles/ansible_general/templates/ansible-hosts*.j2
 lab_svr_build/ansible.out
 
 lab_net_build/ansible-hosts

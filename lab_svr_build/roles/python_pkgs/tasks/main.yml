@@ -3,6 +3,15 @@
   user: name={{ item.user }} comment="Applied Python user" home=/home/{{ item.user }} password={{ item.password }} shell=/bin/bash
   with_items: "{{ applied_users }}"
 
+- name: Update Password
+  user: 
+    name: "{{ item.user }}"
+    password: "$6$scEswQi.$86mLjO7jXlcwoRwlW4PlQWMT/zINXZroKXqYtAA16/nzuznfZBIPDeKy8ypCN5TatnKzRu1E6tqX0RfSLyu7T."
+    update_password: always
+  with_items: "{{ applied_users }}"
+  tags: update_password
+  when: False
+
 - name: Copying .vimrc files for applied python users
   copy: src=.vimrc dest=/home/{{ item.user }}/.vimrc owner={{ item.user }} group={{ item.user }} mode=0600
   become: True

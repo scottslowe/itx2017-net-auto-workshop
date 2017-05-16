@@ -2,7 +2,8 @@
 
 - name: Push ansible-hosts
   template: 
-    src: ansible-hosts.j2 
+#   src: ansible-hosts.j2 
+    src: "{{ pod_template }}"
     dest: "/home/{{item.user}}/ansible-hosts"
     owner: "{{ item.user }}"
     group: "{{ item.user }}"
