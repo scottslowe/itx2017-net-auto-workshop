@@ -5,7 +5,7 @@ from getpass import getpass
 
 net_connect = ConnectHandler(
     device_type='cisco_ios',
-    host='cisco1.twb-tech.com',
+    host='cisco-p3.twb-tech.com',
     username='interop',
     password=getpass()
 )
