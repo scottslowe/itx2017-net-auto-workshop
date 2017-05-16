@@ -1,0 +1,7 @@
+{% for port in ports %}
+interfaces {
+    {{ port.name }} {
+        description "{{ port.descr }}"
+    }
+}
+{% endfor %}

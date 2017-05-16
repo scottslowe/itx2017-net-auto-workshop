@@ -1,34 +1,26 @@
-# ansible-playbook -i ~/ansible-hosts push_config.yml -v
+# ansible-playbook -i ~/ansible-hosts juniper_push_config.yml -v
 ---
 - name: Configure nodes from templates
-  hosts: arista5
+  hosts: juniper1
   vars:
-    eapi_conn:
-      host: '{{ ansible_host }}'
-      username: "{{ username }}"
-      password: "{{ password }}"
-      #transport: ssh
-      use_ssl: true
-      validate_certs: false
     ports:
-      - { name: Ethernet2, descr: Configured by ansible, vlan: 100 }
-      - { name: Ethernet3, descr: host32-eth0 }
+      - { name: 'ge-0/0/0', descr: Configured by ansible }
 
 
   tasks:
-    - name: Ensure backups dir exists
-      file:
-        path: backups
-        state: directory
-
     - name: Ensure config dir exists
       file:
         path: configs
         state: directory
 
+    - name: Ensure backups dir exists
+      file:
+        path: backups
+        state: directory
+
     - name: Render config sections from templates
       template:
-        src: templates/{{ ansible_host }}-adv.j2
+        src: templates/juniper-interfaces.j2
         dest: configs/{{ ansible_host }}-new.cfg
 
 #    - name: Push config commands to nodes with built-in
@@ -41,7 +33,7 @@
         hostname: "{{ ansible_host }}"
         username: "{{ username }}"
         password: "{{ password }}"
-        dev_os: eos
+        dev_os: junos
         config_file: "configs/{{ ansible_host }}-new.cfg"
         archive_file: "backups/{{ ansible_host }}-old.cfg"
         commit_changes: True
