@@ -7,9 +7,9 @@ from pprint import pprint
 
 pwd = getpass()
 
-arista5 = {
+arista1 = {
     'device_type': 'eos',
-    'hostname': 'arista5.twb-tech.com', 
+    'hostname': 'arista-p5.twb-tech.com', 
     'username': 'interop',
     'password': pwd,
     'optional_args': {},
@@ -17,13 +17,13 @@ arista5 = {
 
 cisco1 = {
     'device_type': 'ios',
-    'hostname': 'cisco1.twb-tech.com', 
+    'hostname': 'cisco-p5.twb-tech.com', 
     'username': 'interop',
     'password': pwd,
     'optional_args': {},
 }
 
-for device in [arista5, cisco1]:
+for device in [arista1, cisco1]:
     device_type = device.pop('device_type')
     driver = get_network_driver(device_type)
     napalm_conn = driver(**device)

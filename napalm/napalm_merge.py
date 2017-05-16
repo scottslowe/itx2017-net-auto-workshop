@@ -6,7 +6,7 @@ from pprint import pprint
 
 device1 = {
     'device_type': 'eos',
-    'hostname': 'arista5.twb-tech.com',
+    'hostname': 'arista-p1.twb-tech.com',
     'username': 'interop',
     'password': getpass(),
     'optional_args': {},

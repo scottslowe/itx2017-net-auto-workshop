@@ -5,7 +5,7 @@ from getpass import getpass
 from pprint import pprint
 
 device1 = {
-    'hostname': 'arista5.twb-tech.com', 
+    'hostname': 'arista-p3.twb-tech.com', 
     'username': 'interop',
     'password': getpass(),
     'optional_args': {},
