@@ -31,7 +31,12 @@
 - name: Copy .netmiko.yml file
   become: True
   become_user: "{{ item.user }}"
-  copy: src=.netmiko.yml dest=/home/{{ item.user }}/.netmiko.yml owner={{ item.user }} group={{ item.user }} mode=0600
+  copy: 
+    src: "{{ pod_netmiko }}"
+    dest: "/home/{{ item.user }}/.netmiko.yml"
+    owner: "{{ item.user }}"
+    group: "{{ item.user }}" 
+    mode: 0600
   with_items: "{{ applied_users }}"
   tags: netmiko_yml
 

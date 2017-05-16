@@ -12,7 +12,7 @@ $ netmiko-grep 'interface' cisco
 $ netmiko-show --cmd 'show arp' juniper1   
 
 #### Configure logging buffer on arista-sw5
-$ netmiko-cfg --cmd 'logging buffered 20000' arista-sw5  
+$ netmiko-cfg --cmd 'logging buffered 20000' arista1  
 
 #### Make configuration changes specified in 'logging_change.txt' file
 $ netmiko-cfg --infile logging_change.txt arista  

@@ -1,0 +1,58 @@
+!
+transceiver qsfp default-mode 4x10G
+!
+hostname arista1
+ip domain-name ntc.com
+!
+snmp-server community networktocode ro
+!
+spanning-tree mode mstp
+!
+aaa authorization exec default local
+!
+no aaa root
+!
+username interop privilege 15 secret 5 $1$T85j403F$MrAxCBOEmlTkwO3.RShE71
+!
+vrf definition MANAGEMENT
+   rd 100:100
+!
+interface Ethernet1
+   no switchport
+!
+interface Ethernet2
+   no switchport
+!
+interface Ethernet3
+   no switchport
+!
+interface Ethernet4
+   no switchport
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Management1
+   vrf forwarding MANAGEMENT
+   ip address 10.0.0.24/24
+!
+ip route vrf MANAGEMENT 0.0.0.0/0 10.0.0.2
+!
+ip routing
+ip routing vrf MANAGEMENT
+!
+management api http-commands
+   protocol http
+   no shutdown
+   vrf MANAGEMENT
+      no shutdown
+!
+management ssh
+   vrf MANAGEMENT
+      no shutdown
+!
+!
+end

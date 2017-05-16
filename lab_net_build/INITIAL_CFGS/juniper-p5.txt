@@ -1,0 +1,96 @@
+version 15.1F4.15;
+groups {
+    global {
+        system {
+            login {
+                user interop {
+                    uid 2000;
+                    class super-user;
+                    authentication {
+                        encrypted-password "$5$81JRmtRW$eEZ2w0EyKMTUzeZEdnEh8h9c3g/1wCVM4SiQuvHo.UA"; ## SECRET-DATA
+                    }
+                }
+            }
+        }
+    }
+}
+apply-groups global;
+system {
+    host-name juniper5;
+    domain-name bogus.com;
+    root-authentication {
+        encrypted-password "$5$1FR588oW$dWnmaj9S4t/GHEYL/gn8tOz3.yXoIMYHrCDyn.4hIo0"; ## SECRET-DATA
+    }
+    login {
+        user pyclass {
+            uid 2001;
+            class super-user;
+            authentication {
+                encrypted-password "$5$81JRmtRW$eEZ2w0EyKMTUzeZEdnEh8h9c3g/1wCVM4SiQuvHo.UA"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh;
+        netconf {
+            ssh;
+        }
+    }
+    syslog {
+        user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;   
+        }
+    }
+}
+interfaces {
+    ge-0/0/0 {
+        unit 0 {
+            family inet;
+        }
+    }
+    ge-0/0/1 {
+        unit 0 {
+            family inet;
+        }
+    }
+    ge-0/0/2 {
+        unit 0 {
+            family inet;
+        }
+    }
+    ge-0/0/3 {
+        unit 0 {
+            family inet;
+        }
+    }
+    fxp0 {
+        unit 0 {
+            family inet {
+                address 10.0.0.35/24;
+            }
+        }
+    }
+}
+snmp {
+    community invalid42 {
+        authorization read-only;
+    }
+}
+routing-options {
+    static {
+        route 0.0.0.0/0 next-hop 10.0.0.2;
+    }
+}
+protocols {
+    lldp {
+        port-id-subtype interface-name; 
+        interface all;
+    }
+}

@@ -1,6 +1,6 @@
 ---
 - name: Load Network Device Initial Config
-  hosts: cisco:juniper
+  hosts: cisco
   gather_facts: False
   tasks:
     - napalm_install_config:
@@ -9,7 +9,7 @@
         password: "{{ password }}"
         dev_os: "{{ dev_os }}"
         config_file: "INITIAL_CFGS/{{ inventory_hostname }}.txt"
-        commit_changes: False
+        commit_changes: True
         replace_config: True
         get_diffs: True
         diff_file: "DIFFS/{{ inventory_hostname }}.diff"
