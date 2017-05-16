@@ -2,6 +2,7 @@
 - name: Create users
   user: name={{ item.user }} comment="Applied Python user" home=/home/{{ item.user }} password={{ item.password }} shell=/bin/bash
   with_items: "{{ applied_users }}"
+  when: False
 
 - name: Update Password
   user: 

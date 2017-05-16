@@ -19,8 +19,8 @@
 #     - students_p2.yml
 #     - students_p3.yml
 #     - students_p4.yml
-#     - students_p5.yml
-     - students_p6.yml
+     - students_p5.yml
+#     - students_p6.yml
   tags: interop
   roles:
     - python_pkgs
