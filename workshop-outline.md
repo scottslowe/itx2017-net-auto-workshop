@@ -1,10 +1,15 @@
 ---
-title:          Outline for Hands-on Network Automation Workshop  
-project:        Interop ITX 2017  
-author:         Scott Lowe  
-affiliation:    blog.scottlowe.org  
-date:           2017-04-07  
-keywords:       Python, Ansible, Jinja2, Automation, Networking  
+title:          Outline for Hands-on Network Automation Workshop
+project:        Interop ITX 2017
+author:         Scott Lowe
+affiliation:    blog.scottlowe.org
+date:           2017-04-07
+keywords:
+  - Python
+  - Ansible
+  - Jinja2
+  - Automation
+  - Networking
 ---
 
 # [% title ]
